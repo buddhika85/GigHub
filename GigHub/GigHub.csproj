@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.1.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -193,29 +197,31 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612050422216_InitialModel.cs" />
-    <Compile Include="Migrations\201612050422216_InitialModel.Designer.cs">
-      <DependentUpon>201612050422216_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201612070448308_InitialModel.cs" />
+    <Compile Include="Migrations\201612070448308_InitialModel.Designer.cs">
+      <DependentUpon>201612070448308_InitialModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612050446273_CreateGenreGigTables.cs" />
-    <Compile Include="Migrations\201612050446273_CreateGenreGigTables.Designer.cs">
-      <DependentUpon>201612050446273_CreateGenreGigTables.cs</DependentUpon>
+    <Compile Include="Migrations\201612070449467_PopulateGenreTable.cs" />
+    <Compile Include="Migrations\201612070449467_PopulateGenreTable.Designer.cs">
+      <DependentUpon>201612070449467_PopulateGenreTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612050501333_OverrideConventionsForGenreAndGig.cs" />
-    <Compile Include="Migrations\201612050501333_OverrideConventionsForGenreAndGig.Designer.cs">
-      <DependentUpon>201612050501333_OverrideConventionsForGenreAndGig.cs</DependentUpon>
+    <Compile Include="Migrations\201612070514535_UpdateArtistId.cs" />
+    <Compile Include="Migrations\201612070514535_UpdateArtistId.Designer.cs">
+      <DependentUpon>201612070514535_UpdateArtistId.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612050508405_PopulateGenreTable.cs" />
-    <Compile Include="Migrations\201612050508405_PopulateGenreTable.Designer.cs">
-      <DependentUpon>201612050508405_PopulateGenreTable.cs</DependentUpon>
+    <Compile Include="Migrations\201612070536328_UpdateGigsMakeDateTimeNullable.cs" />
+    <Compile Include="Migrations\201612070536328_UpdateGigsMakeDateTimeNullable.Designer.cs">
+      <DependentUpon>201612070536328_UpdateGigsMakeDateTimeNullable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -226,6 +232,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\GigFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -287,6 +294,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\topNavPartial.cshtml" />
+    <Content Include="Views\Gigs\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -300,17 +309,17 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612050422216_InitialModel.resx">
-      <DependentUpon>201612050422216_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612070448308_InitialModel.resx">
+      <DependentUpon>201612070448308_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612050446273_CreateGenreGigTables.resx">
-      <DependentUpon>201612050446273_CreateGenreGigTables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612070449467_PopulateGenreTable.resx">
+      <DependentUpon>201612070449467_PopulateGenreTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612050501333_OverrideConventionsForGenreAndGig.resx">
-      <DependentUpon>201612050501333_OverrideConventionsForGenreAndGig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612070514535_UpdateArtistId.resx">
+      <DependentUpon>201612070514535_UpdateArtistId.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612050508405_PopulateGenreTable.resx">
-      <DependentUpon>201612050508405_PopulateGenreTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612070536328_UpdateGigsMakeDateTimeNullable.resx">
+      <DependentUpon>201612070536328_UpdateGigsMakeDateTimeNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

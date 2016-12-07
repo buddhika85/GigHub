@@ -7,21 +7,26 @@ namespace GigHub.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        // Foreign key
+        public string ArtistId { get; set; }
+
+        // Navigation peroperty
         public ApplicationUser Artist { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime? DateTime { get; set; }
 
         [Required]
         [StringLength(255)]
         public string Venue { get; set; }
 
+
         // Foreign key
         [Required]
-        public int GenreId { get; set; }
+        public byte GenreId { get; set; }
 
         // Navigation peroperty
-        [Required]
         public Genre Genre { get; set; }
+
+
     }
 }
