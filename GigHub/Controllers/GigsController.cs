@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using GigHub.Models;
+﻿using GigHub.Models;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.Linq;
@@ -44,18 +43,28 @@ namespace GigHub.Controllers
                 return View(nameof(Create), viewModel);
             }
 
+            var userId = User.Identity.GetUserId();
+
+            // Edit
             if (viewModel.Id != 0)
             {
+
                 var gig = _dbContext.Gigs.Single(g => g.Id == viewModel.Id);
-                Mapper.Map<GigFormViewModel, Gig>(viewModel, gig);
-                gig.DateTime = viewModel.DateTime;
+                gig.ArtistId = userId;
+                gig.DateTime = viewModel.GetDateTime();
+                gig.Venue = viewModel.Venue;
+                gig.GenreId = viewModel.GenreId;
+                _dbContext.Gigs.Add(gig);
             }
             else
             {
-                var gig = new Gig();
-                Mapper.Map<GigFormViewModel, Gig>(viewModel, gig);
-                gig.ArtistId = User.Identity.GetUserId();
-                gig.DateTime = viewModel.DateTime;
+                var gig = new Gig
+                {
+                    ArtistId = userId,
+                    DateTime = viewModel.GetDateTime(),
+                    Venue = viewModel.Venue,
+                    GenreId = viewModel.GenreId
+                };
                 _dbContext.Gigs.Add(gig);
             }
 

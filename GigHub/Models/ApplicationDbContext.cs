@@ -5,6 +5,7 @@ namespace GigHub.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        // Custom database tables
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Gig> Gigs { get; set; }
 
