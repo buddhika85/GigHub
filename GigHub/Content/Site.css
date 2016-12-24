@@ -24,6 +24,60 @@ textarea {
 }
 
 
+/* Bootstrap overrides - colors */
+.navbar-inverse {
+    background-color: #ff4342;
+    border-color: #ff4342;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+
+/* Bootstrap overrides - fonts */
+body {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse 
+.navbar-nav > .open > a:focus {    
+    background-color: rgba(245, 20, 19, 0.88);
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
 /* MVC validation styles */
 .validation-summary-errors, .field-validation-error  {
     color:red;
@@ -32,3 +86,4 @@ textarea {
 .input-validation-error {
     border:1px solid red;
 }
+
