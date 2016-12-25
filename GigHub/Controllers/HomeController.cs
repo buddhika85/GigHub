@@ -22,7 +22,11 @@ namespace GigHub.Controllers
 
         public ActionResult Index()
         {
-            var gigs = from g in _dbContext.Gigs.Include(g => g.Artist) where g.DateTime > DateTime.Now select g;
+            var gigs = from g in _dbContext.Gigs
+                       .Include(g => g.Artist)
+                       .Include(g => g.Genre)
+                       where g.DateTime > DateTime.Now
+                       select g;
             return View(gigs);
         }
 

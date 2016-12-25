@@ -1,29 +1,44 @@
 ﻿@model IEnumerable<GigHub.Models.Gig>
 
 @{
-    ViewBag.Title = "Upcoming Gigs";
+    ViewBag.Title = "Upcoming Gigs";    
+    <h3>Upcoming Gigs</h3>
+    <hr />
 
     if (Model.Any())
     {
-        <br />
-        <h3>Upcoming Gigs</h3>
-        <br />
-        <table class="table table-striped">
-            <tr>
-                <th>Artist</th>
-                <th>Date</th>
-                <th>Venue</th>
-            </tr>
-
-            @foreach (var item in Model)
+        <ul class="gigs">
+            @foreach (var gig in Model)
             {
-                <tr>
-                    <td>@item.Artist.Name</td>
-                    <td>@item.DateTime</td>
-                    <td>@item.Venue</td>
-                </tr>
+                @*<li>@item.DateTime - @item.Artist.Name</li>*@
+                <li>
+                    <div class="date">
+                        <div class="month">
+                            @string.Format("{0:MMM}", gig.DateTime)
+                        </div>
+                        <div class="day">
+                            @string.Format("{0:dd}", gig.DateTime)
+                        </div>
+                    </div>
+                    <div class="details">
+                        <span class="artist">
+                            @gig.Artist.Name
+                        </span>
+                        <span class="genre">
+                            @gig.Genre.Name
+                        </span>
+                    </div>
+                    <div>
+                        <div class="day"></div>
+                    </div>
+                    <div class="details">
+                        <span class="artist"></span>
+                        <span class="genre"></span>
+                    </div>
+
+                </li>
             }
-        </table>
+        </ul>
     }
     else
     {
