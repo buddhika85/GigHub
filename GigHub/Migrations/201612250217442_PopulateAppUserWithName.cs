@@ -11,7 +11,7 @@ namespace GigHub.Migrations
 
         public override void Down()
         {
-            Sql("Update AspNetUsers SET Name = null");
+            Sql("Update AspNetUsers SET Name = ''");
         }
     }
 }
