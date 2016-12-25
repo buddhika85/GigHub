@@ -223,6 +223,14 @@
     <Compile Include="Migrations\201612070536328_UpdateGigsMakeDateTimeNullable.Designer.cs">
       <DependentUpon>201612070536328_UpdateGigsMakeDateTimeNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612250216521_AddNameToAppUser.cs" />
+    <Compile Include="Migrations\201612250216521_AddNameToAppUser.Designer.cs">
+      <DependentUpon>201612250216521_AddNameToAppUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612250217442_PopulateAppUserWithName.cs" />
+    <Compile Include="Migrations\201612250217442_PopulateAppUserWithName.Designer.cs">
+      <DependentUpon>201612250217442_PopulateAppUserWithName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -322,6 +330,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612070536328_UpdateGigsMakeDateTimeNullable.resx">
       <DependentUpon>201612070536328_UpdateGigsMakeDateTimeNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612250216521_AddNameToAppUser.resx">
+      <DependentUpon>201612250216521_AddNameToAppUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612250217442_PopulateAppUserWithName.resx">
+      <DependentUpon>201612250217442_PopulateAppUserWithName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

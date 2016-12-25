@@ -7,14 +7,16 @@
 
 @using (Html.BeginForm("Save", "Gigs", "POST")) {
 
-    @Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
 
-    @Html.ValidationSummary(true, "Please fix below errors");
+    @Html.ValidationSummary(true, "Please fix below errors")
+
+    <label class = "alert alert-info">All fields are <strong>Required</strong></label>
 
     <div class="form-group">
         <fieldset>
             @Html.LabelFor(m => m.Venue)
-            @Html.TextBoxFor(m => m.Venue, new { @class = "form-control"})
+            @Html.TextBoxFor(m => m.Venue, new { @class = "form-control", autofocus = "autofocus"})
             @Html.ValidationMessageFor(m => m.Venue)
         </fieldset>
     </div>
@@ -22,7 +24,7 @@
     <div class="form-group">
         <fieldset>
             @Html.LabelFor(m => m.Date)
-            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Date, new { @class = "form-control", placeholder = "eg - 25/12/16" })
             @Html.ValidationMessageFor(m => m.Date)
         </fieldset>
     </div>
@@ -30,7 +32,7 @@
     <div class="form-group">
         <fieldset>
             @Html.LabelFor(m => m.Time)
-            @Html.TextBoxFor(m => m.Time, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Time, new { @class = "form-control", placeholder = "eg - 01:45:00 PM" })
             @Html.ValidationMessageFor(m => m.Time)
         </fieldset>
     </div>

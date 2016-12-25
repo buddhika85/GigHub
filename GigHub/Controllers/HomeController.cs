@@ -1,16 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GigHub.Models;
+using System;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace GigHub.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext _dbContext;
+
+        public HomeController()
+        {
+            _dbContext = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _dbContext.Dispose();
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var gigs = from g in _dbContext.Gigs.Include(g => g.Artist) where g.DateTime > DateTime.Now select g;
+            return View(gigs);
         }
 
         public ActionResult About()
