@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GigHub.Models.Gig>
+
+<h3>My upcoming Gigs</h3>
+<hr />
+
+@if (Model.Any())
+{
+    <ul class="gigs">
+        @foreach (var gig in Model)
+        {
+            @*<li>@item.DateTime - @item.Artist.Name</li>*@
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @string.Format("{0:MMM}", gig.DateTime)
+                    </div>
+                    <div class="day">
+                        @string.Format("{0:dd}", gig.DateTime)
+                    </div>
+                </div>
+                <div class="details">
+                    <span class="artist">
+                        @gig.Venue                        
+                    </span>
+
+                    <span class="genre">
+                        @gig.Genre.Name
+                    </span>                    
+                </div>
+                <div>
+                    <div class="day"></div>
+                </div>
+                <div class="details">
+                    <span class="artist"></span>
+                    <span class="genre"></span>
+                </div>
+
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No upcoming your gigs to display</p>
+}

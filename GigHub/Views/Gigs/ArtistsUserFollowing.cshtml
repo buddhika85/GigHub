@@ -1,0 +1,18 @@
+﻿@model IEnumerable<GigHub.Models.ApplicationUser>
+
+
+<h3>Artists Im Following</h3>
+<hr />
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var artist in Model)
+        {
+            <li>@artist.Name</li>
+        }
+    </ul>
+}
+else
+{
+    <p>You do not follow any artists for now, You can follow artists by visting home page</p>
+}

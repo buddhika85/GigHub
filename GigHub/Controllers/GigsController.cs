@@ -1,6 +1,7 @@
 ﻿using GigHub.Models;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -71,7 +72,7 @@ namespace GigHub.Controllers
             }
 
             _dbContext.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(GetMyUpcomingGigs), "Gigs");
         }
 
         [Authorize]
@@ -93,6 +94,33 @@ namespace GigHub.Controllers
             };
 
             return View("_GigListPartial", gigsViewModel);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult ArtistsUserFollowing()
+        {
+            var userId = User.Identity.GetUserId();
+            var artists = from a in _dbContext.Following
+                          .Include(a => a.Artist)
+                          where a.UserId == userId
+                          select a.Artist;
+            return View(artists);
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult GetMyUpcomingGigs()
+        {
+            var userId = User.Identity.GetUserId();
+            var myGigs = (from g in _dbContext.Gigs
+                          .Include(global => global.Genre)
+                          where g.ArtistId == userId
+                          && g.DateTime > DateTime.Now
+                          select g)
+                         .ToList();
+            return View(myGigs);
         }
     }
 }

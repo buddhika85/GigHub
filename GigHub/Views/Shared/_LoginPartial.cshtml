@@ -12,7 +12,8 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>@Html.ActionLink("Gigs I'm  Going", "GigsUserAttending", "Gigs")</li>
-                    <li><a href="#">Artists I'm Following</a></li>
+                    <li>@Html.ActionLink("Artists I'm Following", "ArtistsUserFollowing", "Gigs")</li>
+                    <li>@Html.ActionLink("My upcoming Gugs", "GetMyUpcomingGigs", "Gigs")</li>
                     <li role="separator" class="divider"></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 </ul>
