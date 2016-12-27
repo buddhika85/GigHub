@@ -1,0 +1,94 @@
+﻿@model GigHub.ViewModels.GigsViewModel
+<h3>@Model.Heading</h3>
+<hr />
+
+@if (Model.Gigs.Any())
+{
+    <ul class="gigs">
+        @foreach (var gig in Model.Gigs)
+        {
+            @*<li>@item.DateTime - @item.Artist.Name</li>*@
+            <li>
+                <div class="date">
+                    <div class="month">
+                        @string.Format("{0:MMM}", gig.DateTime)
+                    </div>
+                    <div class="day">
+                        @string.Format("{0:dd}", gig.DateTime)
+                    </div>
+                </div>
+                <div class="details">
+                    <span class="artist">
+                        @gig.Artist.Name
+                        @if (Model.ShowActions)
+                    {
+                            <button class="btn btn-link btn-sm js-toggle-following"
+                                    data-artist-id="@gig.ArtistId">
+                                Following?
+                            </button>
+                        }
+                    </span>
+
+                    <span class="genre">
+                        @gig.Genre.Name
+                    </span>
+                    @if (Model.ShowActions)
+                    {
+                        <button class="btn btn-default btn-sm pull-right js-toggle-attendance"
+                                data-gig-id="@gig.Id">
+                            Going?
+                        </button>
+                    }
+                </div>
+                <div>
+                    <div class="day"></div>
+                </div>
+                <div class="details">
+                    <span class="artist"></span>
+                    <span class="genre"></span>
+                </div>
+
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No upcoming gigs to display</p>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.js-toggle-attendance').click(function (e) {
+                var btn = $(e.target);
+                $.post("/api/Attendances", { gigId : btn.attr("data-gig-id")})
+                .done(function () {
+                    btn
+                        .removeClass("btn-default")
+                        .addClass("btn-info")
+                        .text("Going");
+                })
+                .fail(function () {
+                    alert("Something failed");
+                })
+            });
+
+            $('.js-toggle-following').click(function (e) {
+                var btn = $(e.target);
+                debugger;
+                $.post("/api/FollowingArtist", { artistId: btn.attr("data-artist-id") })
+                .done(function () {
+                    btn
+                        .removeClass("btn-default")
+                        .addClass("btn-info")
+                        .text("Following");
+                })
+                .fail(function () {
+                    alert("Something failed");
+                })
+            });
+        });
+    </script>
+}

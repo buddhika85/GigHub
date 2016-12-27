@@ -84,12 +84,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -200,10 +212,15 @@
     <Compile Include="App_Start\MappingProfile.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AttendancesController.cs" />
+    <Compile Include="Controllers\FollowingArtistController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Dto\AttendanceDto.cs" />
+    <Compile Include="Dto\FollowArtistDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,11 +252,29 @@
     <Compile Include="Migrations\201612250226204_AddContraintsToArtistName.Designer.cs">
       <DependentUpon>201612250226204_AddContraintsToArtistName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612251056237_AddAttendance.cs" />
+    <Compile Include="Migrations\201612251056237_AddAttendance.Designer.cs">
+      <DependentUpon>201612251056237_AddAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612260510011_AddFollowingArtisit.cs" />
+    <Compile Include="Migrations\201612260510011_AddFollowingArtisit.Designer.cs">
+      <DependentUpon>201612260510011_AddFollowingArtisit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612260548365_AddFollowingArtisit1.cs" />
+    <Compile Include="Migrations\201612260548365_AddFollowingArtisit1.Designer.cs">
+      <DependentUpon>201612260548365_AddFollowingArtisit1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612270409553_AddFollowersToAppUser.cs" />
+    <Compile Include="Migrations\201612270409553_AddFollowersToAppUser.Designer.cs">
+      <DependentUpon>201612270409553_AddFollowersToAppUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\CustomValidationAttributes\FutureDate.cs" />
     <Compile Include="Models\CustomValidationAttributes\ValidTime.cs" />
+    <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -247,6 +282,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\GigFormViewModel.cs" />
+    <Compile Include="ViewModels\GigsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -287,7 +323,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -310,6 +345,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\topNavPartial.cshtml" />
     <Content Include="Views\Gigs\Create.cshtml" />
+    <Content Include="Views\Shared\_GigListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -343,6 +379,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612250226204_AddContraintsToArtistName.resx">
       <DependentUpon>201612250226204_AddContraintsToArtistName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612251056237_AddAttendance.resx">
+      <DependentUpon>201612251056237_AddAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612260510011_AddFollowingArtisit.resx">
+      <DependentUpon>201612260510011_AddFollowingArtisit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612260548365_AddFollowingArtisit1.resx">
+      <DependentUpon>201612260548365_AddFollowingArtisit1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612270409553_AddFollowersToAppUser.resx">
+      <DependentUpon>201612270409553_AddFollowersToAppUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
