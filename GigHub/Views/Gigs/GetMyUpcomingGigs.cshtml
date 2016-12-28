@@ -28,7 +28,9 @@
                     </span>
                     <div class="actions">                        
                         @*<a href="#">Edit</a>*@
-                        @Html.ActionLink("Edit", "Edit", "Gigs", new { id = gig.Id}, null)
+                        @Html.ActionLink("Edit", "Edit", "Gigs", new { id = gig.Id}, null) | 
+                        <a href="#" class="js-cancel-gig" 
+                           data-gig-id="@gig.Id">Cancel</a>
                     </div>
                 </div>
                 <div>
@@ -45,4 +47,49 @@
 else
 {
     <p>No upcoming your gigs to display</p>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.js-cancel-gig').click(function (e) {
+                bootbox.confirm({
+                    message: 'Are you sure that you want to delete this Gig?',
+                    title: 'Confirm cancel Gig',
+                    buttons: {
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-success'
+                        },
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-danger'
+                        }                        
+                    },
+                    callback: function (result) {
+                        bootbox.hideAll();
+                        if (result)
+                        {
+                            var link = $(e.target);
+                            $.ajax({
+                                url: '/api/Gigs/' + link.attr('data-gig-id'),
+                                method: "DELETE"
+
+                            })
+                            .done(function () {
+                                link.parents("li").fadeOut(function () {
+                                    $(this).remove();
+                                });
+                            })
+                            .fail(function (xhr, status, error) {
+                                var err = eval("(" + xhr.responseText + ")");
+                                alert("Something failed - " + err.Message)
+                            })
+                        }
+                    }
+                });  
+            });
+        });
+    </script>
 }

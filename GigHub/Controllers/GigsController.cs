@@ -140,8 +140,9 @@ namespace GigHub.Controllers
         {
             var userId = User.Identity.GetUserId();
             var myGigs = (from g in _dbContext.Gigs
-                          .Include(global => global.Genre)
+                          .Include(g => g.Genre)
                           where g.ArtistId == userId
+                          && g.IsCancelled == false
                           && g.DateTime > DateTime.Now
                           select g)
                          .ToList();

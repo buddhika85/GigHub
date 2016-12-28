@@ -15,6 +15,8 @@ namespace GigHub.Models
 
         public DateTime? DateTime { get; set; }
 
+        public bool IsCancelled { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Venue { get; set; }

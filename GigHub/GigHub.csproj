@@ -214,8 +214,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AttendancesController.cs" />
-    <Compile Include="Controllers\FollowingArtistController.cs" />
+    <Compile Include="Controllers\Api\GigsController.cs" />
+    <Compile Include="Controllers\Api\AttendancesController.cs" />
+    <Compile Include="Controllers\Api\FollowingArtistController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -268,6 +269,10 @@
     <Compile Include="Migrations\201612270409553_AddFollowersToAppUser.Designer.cs">
       <DependentUpon>201612270409553_AddFollowersToAppUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612281644120_AddIsCancelledToGig.cs" />
+    <Compile Include="Migrations\201612281644120_AddIsCancelledToGig.Designer.cs">
+      <DependentUpon>201612281644120_AddIsCancelledToGig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -293,6 +298,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -393,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612270409553_AddFollowersToAppUser.resx">
       <DependentUpon>201612270409553_AddFollowersToAppUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612281644120_AddIsCancelledToGig.resx">
+      <DependentUpon>201612281644120_AddIsCancelledToGig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -29,6 +29,7 @@ namespace GigHub.Controllers
                        .Include(g => g.Artist)
                        .Include(g => g.Genre)
                        where g.DateTime > DateTime.Now
+                       && !g.IsCancelled
                        select g,
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Upcoming Gigs"
