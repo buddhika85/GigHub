@@ -30,6 +30,8 @@ namespace GigHub.ViewModels
         [Required]
         public byte GenreId { get; set; }
 
+        public string Heading { get; set; }
+
         // drop downmenu
         public IEnumerable<Genre> Genres { get; set; }
 

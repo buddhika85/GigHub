@@ -133,3 +133,13 @@ h6,
         font-size: 20px;
         padding: 2px 6px;    
     }
+
+.gigs > li .actions {
+    font-size: 15px;
+    display: none;
+
+}
+
+.gigs > li:hover .actions {
+    display:block;
+}

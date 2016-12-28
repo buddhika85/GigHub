@@ -70,8 +70,10 @@ else
                         .addClass("btn-info")
                         .text("Going");
                 })
-                .fail(function () {
-                    alert("Something failed");
+                .fail(function (xhr, status, error) {
+                    debugger
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert("Something failed - " + err.Message);
                 })
             });
 
@@ -85,8 +87,10 @@ else
                         .addClass("btn-info")
                         .text("Following");
                 })
-                .fail(function () {
-                    alert("Something failed");
+                .fail(function (xhr, status, error) {
+                    debugger
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert("Something failed - " + err.Message);
                 })
             });
         });

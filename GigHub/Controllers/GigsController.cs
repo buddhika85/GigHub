@@ -29,10 +29,36 @@ namespace GigHub.Controllers
         {
             var viewModel = new GigFormViewModel
             {
-                Genres = _dbContext.Genres.ToList()
+                Genres = _dbContext.Genres.ToList(),
+                Heading = "Create a Gig"
             };
 
-            return View(viewModel);
+            return View("GigForm", viewModel);
+        }
+
+        [Authorize]
+        public ActionResult Edit(int? id)
+        {
+            var userId = User.Identity.GetUserId();
+            var gig = (from g in _dbContext.Gigs
+                       where g.Id == id
+                       && g.ArtistId == userId
+                       select g).Single();
+            var viewModel = new GigFormViewModel
+            {
+                Id = gig.Id,
+                Genres = _dbContext.Genres.ToList(),
+                Date = gig.DateTime.HasValue ?
+                    gig.DateTime.Value.ToString("dd/MM/yy") :
+                    "No Date",
+                Time = gig.DateTime.HasValue ?
+                    gig.DateTime.Value.ToString("h:mm:ss tt") :
+                    "No Time",
+                Venue = gig.Venue,
+                GenreId = gig.GenreId,
+                Heading = string.Format("Edit {0} Gig", gig.Venue)
+            };
+            return View("GigForm", viewModel);
         }
 
         [Authorize]
@@ -57,7 +83,6 @@ namespace GigHub.Controllers
                 gig.DateTime = viewModel.GetDateTime();
                 gig.Venue = viewModel.Venue;
                 gig.GenreId = viewModel.GenreId;
-                _dbContext.Gigs.Add(gig);
             }
             else
             {

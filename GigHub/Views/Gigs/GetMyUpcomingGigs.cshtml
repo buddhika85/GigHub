@@ -20,12 +20,16 @@
                 </div>
                 <div class="details">
                     <span class="artist">
-                        @gig.Venue                        
+                        @gig.Venue
                     </span>
 
                     <span class="genre">
                         @gig.Genre.Name
-                    </span>                    
+                    </span>
+                    <div class="actions">                        
+                        @*<a href="#">Edit</a>*@
+                        @Html.ActionLink("Edit", "Edit", "Gigs", new { id = gig.Id}, null)
+                    </div>
                 </div>
                 <div>
                     <div class="day"></div>
@@ -34,7 +38,6 @@
                     <span class="artist"></span>
                     <span class="genre"></span>
                 </div>
-
             </li>
         }
     </ul>

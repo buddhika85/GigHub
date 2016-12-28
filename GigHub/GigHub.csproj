@@ -344,7 +344,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\topNavPartial.cshtml" />
-    <Content Include="Views\Gigs\Create.cshtml" />
+    <Content Include="Views\Gigs\GigForm.cshtml" />
     <Content Include="Views\Shared\_GigListPartial.cshtml" />
     <Content Include="Views\Gigs\ArtistsUserFollowing.cshtml" />
     <Content Include="Views\Gigs\GetMyUpcomingGigs.cshtml" />
